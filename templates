@@ -1,0 +1,57 @@
+CM
+CanteenFlow
+Order Management System
+
+System Online
+CAMPUS CANTEEN
+
+Good food. Easy ordering.
+Choose your favourites, place an order, and track the queue.
+
+🍽️
+☷
+Menu Items
+
+{{ menu|length }}
+◷
+Pending Orders
+
+0
+₹
+Starting From
+
+₹10
+OUR MENU
+
+Pick your meal
+{{ menu|length }} items
+{% set icons = {'Sandwich':'🥪', 'Burger':'🍔', 'Tea':'🍵', 'Coffee':'☕', 'Dosa':'🥞', 'Poha':'🥣'} %} {% for name, price in menu.items() %}
+{{ icons[name] }}
+{{ name }}
+Freshly prepared
+
+₹{{ price }}
++
+{% endfor %}
+YOUR ORDER
+
+Shopping cart
+0
+🛒
+Your cart is empty
+
+Add something tasty from the menu.
+Subtotal₹0
+Service charge₹0
+Total amount₹0
+Place Order → Clear cart
+FIFO DATA STRUCTURE
+
+Live order queue
+First In, First Out — oldest order is processed first.
+
+Process Next Order →
+No pending orders yet. Place an order to see it here.
+CanteenFlow · Data Structures Mini Project
+
+Built with HTML, CSS, JavaScript and Python Flask
