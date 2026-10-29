@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canteen Order Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand-mark">CM</div>
+        <div>
+            <h1>Canteen<span>Flow</span></h1>
+            <p>Order Management System</p>
+        </div>
+        <div class="topbar-right"><span class="status-dot"></span> System Online</div>
+    </header>
+
+    <main class="page-wrap">
+        <section class="welcome">
+            <div>
+                <p class="eyebrow">CAMPUS CANTEEN</p>
+                <h2>Good food. <span>Easy ordering.</span></h2>
+                <p class="welcome-copy">Choose your favourites, place an order, and track the queue.</p>
+            </div>
+            <div class="welcome-icon" aria-hidden="true">🍽️</div>
+        </section>
+
+        <section class="stats-grid">
+            <article class="stat-card">
+                <div class="stat-icon purple">☷</div>
+                <div><p>Menu Items</p><h3>{{ menu|length }}</h3></div>
+            </article>
+            <article class="stat-card">
+                <div class="stat-icon orange">◷</div>
+                <div><p>Pending Orders</p><h3 id="pending-count">0</h3></div>
+            </article>
+            <article class="stat-card">
+                <div class="stat-icon green">₹</div>
+                <div><p>Starting From</p><h3>₹10</h3></div>
+            </article>
+        </section>
+
+        <div class="content-grid">
+            <section class="panel menu-panel">
+                <div class="section-heading">
+                    <div><p class="eyebrow">OUR MENU</p><h2>Pick your meal</h2></div>
+                    <span class="pill">{{ menu|length }} items</span>
+                </div>
+                <div class="menu-grid">
+                    {% set icons = {'Sandwich':'🥪', 'Burger':'🍔', 'Tea':'🍵', 'Coffee':'☕', 'Dosa':'🥞', 'Poha':'🥣'} %}
+                    {% for name, price in menu.items() %}
+                    <article class="food-card">
+                        <div class="food-emoji">{{ icons[name] }}</div>
+                        <div class="food-details">
+                            <h3>{{ name }}</h3>
+                            <p class="food-note">Freshly prepared</p>
+                            <strong>₹{{ price }}</strong>
+                        </div>
+                        <button class="add-btn" data-name="{{ name }}" aria-label="Add {{ name }}">+</button>
+                    </article>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <aside class="panel cart-panel">
+                <div class="section-heading">
+                    <div><p class="eyebrow">YOUR ORDER</p><h2>Shopping cart</h2></div>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+                <div id="cart-items" class="cart-items">
+                    <div class="empty-state"><span>🛒</span><p>Your cart is empty</p><small>Add something tasty from the menu.</small></div>
+                </div>
+                <div class="bill-summary">
+                    <div><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
+                    <div><span>Service charge</span><strong>₹0</strong></div>
+                    <div class="bill-total"><span>Total amount</span><strong id="total">₹0</strong></div>
+                </div>
+                <button id="place-order" class="primary-btn">Place Order <span>→</span></button>
+                <button id="clear-cart" class="text-btn">Clear cart</button>
+                <p id="cart-message" class="message" role="status"></p>
+            </aside>
+        </div>
+
+        <section class="panel queue-panel">
+            <div class="section-heading queue-heading">
+                <div><p class="eyebrow">FIFO DATA STRUCTURE</p><h2>Live order queue</h2><p class="subheading">First In, First Out — oldest order is processed first.</p></div>
+                <button id="process-next" class="secondary-btn">Process Next Order <span>→</span></button>
+            </div>
+            <div id="queue-list" class="queue-list">
+                <div class="queue-empty">No pending orders yet. Place an order to see it here.</div>
+            </div>
+            <p id="queue-message" class="message" role="status"></p>
+        </section>
+
+        <footer>
+            <p><strong>CanteenFlow</strong> · Data Structures Mini Project</p>
+            <p>Built with HTML, CSS, JavaScript and Python Flask</p>
+        </footer>
+    </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
